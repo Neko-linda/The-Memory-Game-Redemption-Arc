@@ -5,22 +5,25 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>The Kawaii Memory Game</title>
     <script src="Js/app.js" defer></script>
+    <link rel="stylesheet" href="./Css/style.css">
 </head>
 
 <body>
     <!-- div for the game and the active stats go here, along with any buttons -->
     <div class="game">
-        <div class="controlBoard">
+        <div class="controlPanel">
+            <button class="start">Start Game</button>
+            <button id="stop" class="hide"></button>
         <div class="stats">
             <div class="moveCounter">Moves made: 0</div>    
             <div class="timer">Time: 0 sec</div>
             </div>
         </div>
-    </div>
  <!-- initializing div for the win condition and  -->
     <div class="gameBoard">
         <div class="board" data-dimension="4"></div>
         <div class="win"></div>
+        </div>
     </div>
     <!-- create a counter for moves made and a timer for the game -->
 
