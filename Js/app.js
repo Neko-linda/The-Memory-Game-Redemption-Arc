@@ -1,7 +1,7 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // let playerGreeting = "Hello! Welcome to the Kawaii Memory Game. The way to play is as follows: Click on the cards you'd like to flip over. If you find a matching pair, you will gain points. Once all pairs are found, You have won the game! Hit the start button to begin."
+    let playerGreeting = "Hello! Welcome to the Kawaii Memory Game. The way to play is as follows: Click on the cards you'd like to flip over. If you find a matching pair, you will gain points. Once all pairs are found, You have won the game! Hit the start button to begin."
 
-// alert(playerGreeting)
+alert(playerGreeting)
 
 const gameSelectors = {
     gameBoard: document.querySelector('.gameBoard'),
@@ -58,16 +58,16 @@ const random = (array, items) => {
 //     })
 // }
 const cards = [
-    { name: "KawaiiCat", img: "Images/KawaiiCat.png" },
-    { name: "KawaiiLion", img: "Images/KawaiiLion.png" },
-    { name: "KawaiiMoon", img: "Images/KawaiiMoon.png" },
-    { name: "KawaiiSun", img: "Images/KawaiiSun.png" },
-    { name: "KawaiiCherries", img: "Images/KawaiiCherries.png" },
-    { name: "KawaiiStars", img: "Images/KawaiiStars.png" },
-    { name: "KawaiiSunflowers", img: "Images/KawaiiSunflower.png" },
-    { name: "KawaiiFrog", img: "Images/KawaiiFrog.png" },
-    { name: "KawaiiHearts", img: "Images/KawaiiHearts.png" },
-    { name: "KawaiiSunflower", img: "Images/KawaiiSunflower.png" },
+    { name: "KawaiiCat", img: "Images/KawaiiCat copy.png" },
+    { name: "KawaiiLion", img: "Images/KawaiiLion copy.png" },
+    { name: "KawaiiMoon", img: "Images/KawaiiMoon copy.png" },
+    { name: "KawaiiSun", img: "Images/KawaiiSun copy.png" },
+    { name: "KawaiiCherries", img: "Images/KawaiiCherries copy.png" },
+    { name: "KawaiiStars", img: "Images/KawaiiStars copy.png" },
+    { name: "KawaiiSunflowers", img: "Images/KawaiiSunflower copy.png" },
+    { name: "KawaiiFrog", img: "Images/KawaiiFrog copy.png" },
+    { name: "KawaiiHearts", img: "Images/KawaiiHearts copy.png" },
+    { name: "KawaiiSunflower", img: "Images/KawaiiSunflower copy.png" },
 ];
 
 const generateGame = () => {
@@ -84,17 +84,18 @@ const generateGame = () => {
 
     const items = shuffleCards([...pickedCards, ...pickedCards]);
     //shuffles the cards taken
-
-    const cardDisplay = `
+const cardDisplay = `
 <div class="board" style="grid-template-columns: repeat(${dimensions}, auto)">
     ${items.map(item => `
     <div class="card">
         <div class="card-front"></div>
-        <div class="card-back">${item}</div>
+        <div class="card-back">
+            <img src="${item.img}" alt="${item.name}">
         </div>
-        `).join('')}
     </div>
-`
+    `).join('')}
+</div>
+`;
     //displaying the game board, uses the shuffled cards (items) and iterates over them (.map) using .join to concatenate into a single string.
     //Also creates a grid with rows and columns based on dimensions, each grid gets generated with a card both front and back
     const parser = new DOMParser().parseFromString(cardDisplay, 'text/html');
