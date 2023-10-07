@@ -69,6 +69,7 @@ const cards = [
     {name: "KawaiiSunflowers", img: "Images/KawaiiSunflower.png"},
     {name: "KawaiiFrog", img: "Images/KawaiiFrog.png"},
     {name: "KawaiiHearts", img: "Images/KawaiiHearts.png"},
+    {name: "KawaiiSunflower", img: "Images/KawaiiSunflower.png"},
    ];
    //using cards from old project
 
@@ -131,27 +132,47 @@ const flipBackCards = () => {
 const flipCard = card => {
     state.flippedCards++;
     state.totalFlips++;
+    //increments counters to keep track of how many cards are flipped and the total flips made.
 
     if(!state.gamestarted){
+        //check if the game started, if not, call start game
         startGame()
     }
     if(state.flippedCards <= 2){
         card.classList.add('flipped')
+        //if # of Flipped cards is 2 or less, add 'flipped' class to the card
     }
     if(state.flippedCards === 2){
-        const flippedCards = document.querySelectorAll('.flipped:noy(.matched)');
+        const flippedCards = document.querySelectorAll('.flipped:not(.matched)');
+        //check if two cards are a match, selects elements with the 'flipped' class that dont have the 'matched' class.
         if(flippedCards[0].innerHtml === flippedCards[1].innerHtml){
+            //check if html content in the cards are the same
             flippedCards[0].classList.add('.matched');
             flippedCards[0].classList.add('.matched');
+            //if cards match, add a 'matched' class to them
         }
-        setTimeout(() -> {
+        setTimeout(() => {
             flipBackCards()
         }, 1000)
     }
     if(!document.querySelectorAll('card:not(flipped)').length) {
+        //check to see if there are any cards left to flip
         setTimeout(() => {
             gameSelectors.boardContainer.classList.add('flipped')
-            gameSelectors.win.innerHTML = ``
-        })
+            //if true, add 'flipped' class to board container
+            gameSelectors.win.innerHTML = `
+            <span class = "win-text">
+            You won!<br />
+            with <span class = "highlight">${state.totalFlips}</span>
+            moves<br />
+            under <span class = "highlight"${state.totalTime}</span>
+            seconds
+            </span>
+            `
+            //update the HTML to an element with 'win' class, display message that player has won along with the total time elapsed and total amount of moves made.
+            clearInterval(state.loop)
+        }, 1000)
+        //resets timer
     }
 }
+
