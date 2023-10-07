@@ -13,19 +13,20 @@
     <div class="game">
         <div class="controlPanel">
             <button class="start">Start Game</button>
-            <button id="stop" class="hide"></button>
+            <button id="stop" class="hide">Stop Game</button>
         <div class="stats">
             <div class="moveCounter">Moves made: 0</div>    
             <div class="timer">Time: 0 sec</div>
             </div>
         </div>
- <!-- initializing div for the win condition and  -->
+ <!-- initializing div for the win condition -->
     <div class="gameBoard">
         <div class="board" data-dimension="4"></div>
         <div class="win"></div>
         </div>
     </div>
     <!-- create a counter for moves made and a timer for the game -->
+    <!-- using data attributes on the board div in order to use in JS when generating the game -->
 
 </body>
 </html>

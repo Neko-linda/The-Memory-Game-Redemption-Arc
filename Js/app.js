@@ -1,8 +1,12 @@
+// let playerGreeting = "Hello! Welcome to the Kawaii Memory Game. The way to play is as follows: Click on the cards you'd like to flip over. If you find a matching pair, you will gain points. Once all pairs are found, You have won the game! Hit the start button to begin."
+
+// alert(playerGreeting)
+
 const gameSelectors = {
     gameBoard: document.querySelector('.gameBoard'),
     board: document.querySelector('.board'),
     moves: document.querySelector('.moveCounter'),
-    timer: document.querySelector('timer'),
+    timer: document.querySelector('.timer'),
     start: document.querySelector('.start'),
     stop: document.getElementById('stop'),
     win: document.querySelector('.win')
@@ -14,7 +18,7 @@ const gameStart = {
     totalFlips: 0,
     totalTime: 0,
     loop: null
-}; 
+};
 
 const shuffleCards = array => {
     const secondArray = [...array];
@@ -25,7 +29,7 @@ const shuffleCards = array => {
         secondArray[randomIndex] = cardArray
     }
     return secondArray;
-}
+};
 
 const random = (array, items) => {
     const secondArray = [...array];
@@ -38,4 +42,27 @@ const random = (array, items) => {
         secondArray.splice(randomIndex, 1);
     }
     return randomCards
+};
+
+// const startGame = () => {
+//     gameStart.gameStart = true;
+//     gameSelectors.start.classList.add('disabled');
+//     StaticRange.loop = setInterval(() => {
+//         StaticRange.totalTime++;
+
+//         gameSelectors.moves.innerText = `${state.totalFlips} moves`;
+//         gameSelectors.timer.innerText = `${state.totalTime} sec`
+//     })
+// }
+
+
+//add card objects to access in css
+const items = 
+const cards = 
+const pickedCards =
+
+//flip card function must have a check for match function + a function to flip cards back around if pair are not a match
+
+const flipCard = {
+    const checkForMatch =
 }
