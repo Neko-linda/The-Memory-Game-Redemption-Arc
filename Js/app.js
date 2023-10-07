@@ -88,10 +88,67 @@ const cardDisplay = `
         `).join('')}
     </div>
 `
-//creates a grid with rows and columns based on dimensions, each grid gets generated with a card both front and back
+//displaying the game board, uses the shuffled cards (items) and iterates over them (.map) using .join to concatenate into a single string.
+//Also creates a grid with rows and columns based on dimensions, each grid gets generated with a card both front and back
+
+const parser = new DOMParser().parseFromString(cardDisplay, 'text/html');
+//creates a new DOM tree for the html doc using newDOMParser to extract element with the .replaceWith function.
+
+gameSelectors.board.replaceWith(parser.querySelector('.board'))
+//replaces the content of the board class with that of the "card display" template, gameselecotrs.board accesses the board class in the gameselectors object.
+
 
 //flip card function must have a check for match function + a function to flip cards back around if pair are not a match
 
-const flipCard = {
-    const checkForMatch =
+// const flipCard = {
+//     const checkForMatch =
+// }
+//must go inside function that starts game
+
+const startGame = () => {
+    state.gamestarted = true;
+    gameSelectors.start.classList.add('disabled');
+    //add disabled class so start button cannot be clicked again once the game has started
+    state.loop = setInterval(() => {
+        state.totalTime++;
+        //set interval executes the totaltime every 1000 ms and state.totaltime keeps track of elapsed time.
+        gameSelectors.moves.innerText = `${state.totalFlips} moves`;
+        gameSelectors.timer.innerHTML = `Time: ${state.totalTime} sec`
+        //innertext and html updates the html to display the changes to the user.
+    }, 1000)
+}
+
+const flipBackCards = () => {
+    document.querySelectorAll('.card:not(.matched').forEach(card => {
+        card.classList.remove('.flipped');
+    });
+    state.flippedCards = 0;
+}
+
+const flipCard = card => {
+    state.flippedCards++;
+    state.totalFlips++;
+
+    if(!state.gamestarted){
+        startGame()
+    }
+    if(state.flippedCards <= 2){
+        card.classList.add('flipped')
+    }
+    if(state.flippedCards === 2){
+        const flippedCards = document.querySelectorAll('.flipped:noy(.matched)');
+        if(flippedCards[0].innerText === flippedCards[1].innerText){
+            flippedCards[0].classList.add('.matched');
+            flippedCards[0].classList.add('.matched');
+        }
+        setTimeout(() -> {
+            flipBackCards()
+        }, 1000)
+    }
+    if(!document.querySelectorAll('card:not(flipped)').length) {
+        setTimeout(() => {
+            gameSelectors.boardContainer.classList.add('flipped')
+            gameSelectors.win.innerHTML = ``
+        })
+    }
 }
