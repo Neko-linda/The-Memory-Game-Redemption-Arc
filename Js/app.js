@@ -120,9 +120,12 @@ const startGame = () => {
 
 const flipBackCards = () => {
     document.querySelectorAll('.card:not(.matched').forEach(card => {
+        //select all elements with the class name 'card' that DONT have the matched class
         card.classList.remove('.flipped');
+        //remove the 'flipped' class and flip them back over if the above is true
     });
     state.flippedCards = 0;
+    //resets to 0 and lets the game know that no more cards are flipped
 }
 
 const flipCard = card => {
@@ -137,7 +140,7 @@ const flipCard = card => {
     }
     if(state.flippedCards === 2){
         const flippedCards = document.querySelectorAll('.flipped:noy(.matched)');
-        if(flippedCards[0].innerText === flippedCards[1].innerText){
+        if(flippedCards[0].innerHtml === flippedCards[1].innerHtml){
             flippedCards[0].classList.add('.matched');
             flippedCards[0].classList.add('.matched');
         }

@@ -1,5 +1,6 @@
 body{
-    background-color: rgb(237, 166, 209);
+    background-image: url(https://img.freepik.com/free-vector/gradient-pastel-sky-background_23-2148909258.jpg);
+    background-size: cover;
 }
 
 .board {
@@ -27,16 +28,23 @@ body{
 }
 
 .stats {
-
+    font-size: 45px;
+    font-weight: normal;
+    color: blueviolet;
 }
 
 button {
-    border-radius: 5px;
+    background-color: rgb(179, 214, 249);
+    color: blueviolet;
+    border-radius: 40px;
     border: 0;
     cursor: pointer;
-    color: purple
+    padding: 10px 10px;
+    font-size: 40px;
 }
 
-.win {
-
+.board, .win {
+    box-shadow: 0 20px 20px rgb(79, 42, 77);
+    border-radius: 10px;
+    background: rgb(162, 200, 237);
 }
