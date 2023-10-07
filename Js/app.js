@@ -20,6 +20,7 @@ const gameStart = {
     loop: null
 };
 
+//Shuffle the cards first before presenting to user
 const shuffleCards = array => {
     const secondArray = [...array];
     for (let i = secondArray.length - 1; i > 0; i--){
@@ -31,6 +32,7 @@ const shuffleCards = array => {
     return secondArray;
 };
 
+//randomize placement of cards on board each time game starts
 const random = (array, items) => {
     const secondArray = [...array];
     const randomCards = [];
@@ -57,9 +59,36 @@ const random = (array, items) => {
 
 
 //add card objects to access in css
-const items = 
-const cards = 
-const pickedCards =
+const cards = [
+    {name: "KawaiiCat", img: "Images/KawaiiCat.png"},
+    {name: "KawaiiLion", img: "Images/KawaiiLion.png"},
+    {name: "KawaiiMoon", img: "Images/KawaiiMoon.png"},
+    {name: "KawaiiSun", img: "Images/KawaiiSun.png" },
+    {name: "KawaiiCherries", img: "Images/KawaiiCherries.png"},
+    {name: "KawaiiStars", img: "Images/KawaiiStars.png"},
+    {name: "KawaiiSunflowers", img: "Images/KawaiiSunflower.png"},
+    {name: "KawaiiFrog", img: "Images/KawaiiFrog.png"},
+    {name: "KawaiiHearts", img: "Images/KawaiiHearts.png"},
+   ];
+   //using cards from old project
+
+const pickedCards = pickedCardsRandom(cards, (dimensions * dimensions) / 2);
+// takes cards from the cards array
+
+const items = shuffle([...pickedCards, ...pickedCards]);
+//shuffles the cards taken
+
+const cardDisplay = `
+<div class="board" style="grid-template-columns: repeat(${dimensions}, auto)">
+    ${items.map(item => `
+    <div class="card">
+        <div class="card-front"></div>
+        <div class="card-back">${item}</div>
+        </div>
+        `).join('')}
+    </div>
+`
+//creates a grid with rows and columns based on dimensions, each grid gets generated with a card both front and back
 
 //flip card function must have a check for match function + a function to flip cards back around if pair are not a match
 
