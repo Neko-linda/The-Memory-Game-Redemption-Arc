@@ -58,7 +58,7 @@ const random = (array, items) => {
 // }
 
 
-//add card objects to access in css
+//add card objects to access in css, using relative pathing
 const cards = [
     {name: "KawaiiCat", img: "Images/KawaiiCat.png"},
     {name: "KawaiiLion", img: "Images/KawaiiLion.png"},

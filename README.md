@@ -9,3 +9,18 @@ The more pairs that are found, the higher the score will become.
 This project will display how I implement the lessons I learned in Javascript and DOM Manipulation into a game. 
 
 I will design logic for winning and visually display when the user has won. The user will be playing the computer.
+
+An example of some code I am using:
+
+const shuffleCards = array => {
+    const secondArray = [...array];
+    for (let i = secondArray.length - 1; i > 0; i--){
+        const randomIndex = Math.floor(Math.random() * (i + 1));
+        const cardArray = secondArray[i];
+        secondArray[i] = secondArray[randomIndex];
+        secondArray[randomIndex] = cardArray
+    }
+    return secondArray;
+};
+
+This is my shuffleCards function that will make sure that each time the page is refreshed or the game is restated, the card tiles will never be in the same place more than once, so the user cannot predict where the matches will be. 
