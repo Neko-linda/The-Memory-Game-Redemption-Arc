@@ -96,6 +96,47 @@ const startGame = () => {
         //innertext and html updates the html to display the changes to the user.
     }, 1000)
 }
+
+// const flipCard = card => {
+//     gameStart.flippedCards++;
+//     gameStart.totalFlips++;
+//     if (!gameStart.gameStarted) {
+//         startGame();
+//     }
+//     card.classList.add('flipped');
+
+//     if (gameStart.flippedCards === 2) {
+//         const flippedCards = document.querySelectorAll('.flipped:not(.matched)');
+
+//         if (flippedCards.length === 2 && flippedCards[0].innerHTML === flippedCards[1].innerHTML) {
+//             flippedCards.forEach(card => card.classList.add('matched'));
+//         } else {
+//             setTimeout(() => {
+//                 flippedCards.forEach(card => card.classList.remove('flipped'));
+//             }, 1000);
+//         }
+//         gameStart.flippedCards = 0;
+//     }
+
+//     // Check for game completion after the timeout
+//     setTimeout(() => {
+//         const unmatchedCards = document.querySelectorAll('.card:not(.matched)');
+//         if (unmatchedCards.length === 0) {
+//             gameSelectors.board.classList.add('flipped'); // Add 'flipped' class to the game board
+//             gameSelectors.win.innerHTML = `
+//                 <span class="win-text">
+//                 You won!<br />
+//                 with <span class="highlight">${gameStart.totalFlips}</span>
+//                 moves<br />
+//                 under <span class="highlight">${gameStart.totalTime}</span>
+//                 seconds
+//                 </span>
+//             `;
+//             clearInterval(gameStart.loop);
+//         }
+//     }, 1000);
+// };
+
 const flipCard = card => {
     gameStart.flippedCards++;
     gameStart.totalFlips++;
@@ -103,25 +144,33 @@ const flipCard = card => {
         startGame();
     }
     card.classList.add('flipped');
-    //when card is flipped add 'flipped' class
+
     if (gameStart.flippedCards === 2) {
         const flippedCards = document.querySelectorAll('.flipped:not(.matched)');
-        //selecting flipped cards that havent been matched yet
-        if (flippedCards.length === 2 && flippedCards[0].innerHTML === flippedCards[1].innerHTML) {
-            flippedCards.forEach(card => card.classList.add('matched'));
-            //check if the two flipped cards are a match by checking html content
-        } else {
-            setTimeout(() => {
-                flippedCards.forEach(card => card.classList.remove('flipped'));
-            }, 1000);
-            //else remove the 'flipped' class.
+
+        if (flippedCards.length === 2) {
+            // Check if the two flipped cards are a match by comparing their alt attributes
+            const alt1 = flippedCards[0].querySelector('img').alt;
+            const alt2 = flippedCards[1].querySelector('img').alt;
+
+            if (alt1 === alt2) {
+                // Cards match, mark them as 'matched'
+                flippedCards.forEach(card => card.classList.add('matched'));
+            } else {
+                // Cards don't match, unflip them after a delay
+                setTimeout(() => {
+                    flippedCards.forEach(card => card.classList.remove('flipped'));
+                }, 1000);
+            }
         }
         gameStart.flippedCards = 0;
     }
-    const unmatchedCards = document.querySelectorAll('.card:not(.matched)');
-    if (unmatchedCards.length === 0) {
-        setTimeout(() => {
-            gameSelectors.boardContainer.classList.add('flipped');
+
+    // Check for game completion after the timeout
+    setTimeout(() => {
+        const unmatchedCards = document.querySelectorAll('.card:not(.matched)');
+        if (unmatchedCards.length === 0) {
+            gameSelectors.board.classList.add('flipped'); // Add 'flipped' class to the game board
             gameSelectors.win.innerHTML = `
                 <span class="win-text">
                 You won!<br />
@@ -132,9 +181,10 @@ const flipCard = card => {
                 </span>
             `;
             clearInterval(gameStart.loop);
-        }, 1000);
-    }
-}
+        }
+    }, 1000);
+};
+
 const attachEventListeners = () => {
     document.addEventListener('click', event => {
         const eventTarget = event.target;
