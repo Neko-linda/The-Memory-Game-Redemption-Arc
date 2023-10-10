@@ -1,13 +1,14 @@
 document.addEventListener('DOMContentLoaded', () => {
     let playerGreeting = "Hello! Welcome to the Kawaii Memory Game. The way to play is as follows: Click on the cards you'd like to flip over. If you find a matching pair, you will gain points. Once all pairs are found, You have won the game! Hit the start button to begin."
-    // alert(playerGreeting)
+    alert(playerGreeting)
+    
     const gameSelectors = {
         gameBoard: document.querySelector('.gameBoard'),
         board: document.querySelector('.board'),
         moves: document.querySelector('.moveCounter'),
         timer: document.querySelector('.timer'),
         start: document.querySelector('.start'),
-        stop: document.getElementById('stop'),
+        reset: document.getElementById('reset'),
         win: document.querySelector('.win')
     };
     const gameStart = {
@@ -17,6 +18,7 @@ document.addEventListener('DOMContentLoaded', () => {
         totalTime: 0,
         loop: null
     };
+   
     //Shuffle the cards first before presenting to user
     const shuffleCards = array => {
         const secondArray = [...array];
@@ -56,25 +58,25 @@ document.addEventListener('DOMContentLoaded', () => {
         if (dimensions % 2 !== 0) {
             throw new Error("The dimension of the board must be an even number.")
         }
-        //add card objects to access in css, using relative pathing
-        //using cards from old project
-        const pickedCards = random(cards, (dimensions * dimensions) / 2);
-        //random called earlier in code
-        // takes cards from the cards array
-        const items = shuffleCards([...pickedCards, ...pickedCards]);
-        //shuffles the cards taken
-        const cardDisplay = `
-<div class="board" style="grid-template-columns: repeat(${dimensions}, auto)">
-    ${items.map(item => `
-    <div class="card">
-        <div class="card-front"></div>
-        <div class="card-back">
-            <img src="${item.img}" alt="${item.name}">
+            //add card objects to access in css, using relative pathing
+            //using cards from old project
+            const pickedCards = random(cards, (dimensions * dimensions) / 2);
+            //random called earlier in code
+            // takes cards from the cards array
+            const items = shuffleCards([...pickedCards, ...pickedCards]);
+            //shuffles the cards taken
+            const cardDisplay = `
+            <div class="board" style="grid-template-columns: repeat(${dimensions}, auto)">
+            ${items.map(item => `
+            <div class="card">
+            <div class="card-front"></div>
+            <div class="card-back">
+                <img src="${item.img}" alt="${item.name}">
+            </div>
         </div>
+        `).join('')}
     </div>
-    `).join('')}
-</div>
-`;
+    `;
         //displaying the game board, uses the shuffled cards (items) and iterates over them (.map) using .join to concatenate into a single string.
         //Also creates a grid with rows and columns based on dimensions, each grid gets generated with a card both front and back
         const parser = new DOMParser().parseFromString(cardDisplay, 'text/html');
@@ -149,9 +151,31 @@ document.addEventListener('DOMContentLoaded', () => {
         }, 1000);
     }
 
+    const resetGame = () => {
+        // Clear the game loop
+        clearInterval(gameStart.loop);
+
+        // Reset game state
+        gameStart.gameStarted = false;
+        gameStart.flippedCards = 0;
+        gameStart.totalFlips = 0;
+        gameStart.totalTime = 0;
+
+        // Reset the UI elements
+        gameSelectors.moves.innerText = 'Moves made: 0';
+        gameSelectors.timer.innerText = 'Time: 0 sec';
+
+        // Remove the 'disabled' class from the Start Game button to enable it again
+        gameSelectors.start.classList.remove('disabled');
+
+        // Hide the win screen (if it's currently shown)
+        gameSelectors.win.classList.remove('show');
+    };
+    
 
     const attachEventListeners = () => {
         document.addEventListener('click', event => {
+            gameSelectors.reset.addEventListener('click', resetGame);
             const eventTarget = event.target;
             const eventParent = eventTarget.parentElement;
             if (eventTarget.className.includes('card') && !eventParent.className.includes('flipped')) {

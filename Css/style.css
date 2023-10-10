@@ -8,7 +8,12 @@ html{
 
 .disabled {
     color: gray;
+    pointer-events: none;
 }
+
+/* .hide {
+    display: none;
+} */
 
 .board {
     padding: 20px;
