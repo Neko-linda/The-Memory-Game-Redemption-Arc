@@ -39,15 +39,6 @@ const random = (array, items) => {
     }
     return randomCards
 };
-// const startGame = () => {
-//     gameStart.gameStart = true;
-//     gameSelectors.start.classList.add('disabled');
-//     StaticRange.loop = setInterval(() => {
-//         StaticRange.totalTime++;
-//         gameSelectors.moves.innerText = `${gameStart.totalFlips} moves`;
-//         gameSelectors.timer.innerText = `${gameStart.totalTime} sec`
-//     })
-// }
 const cards = [
     { name: "KawaiiCat", img: "Images/KawaiiCat copy.png" },
     { name: "KawaiiLion", img: "Images/KawaiiLion copy.png" },
@@ -92,9 +83,6 @@ const cardDisplay = `
 }
 //replaces the content of the board class with that of the "card display" template, gameselecotrs.board accesses the board class in the gameselectors object.
 //flip card function must have a check for match function + a function to flip cards back around if pair are not a match
-// const flipCard = {
-//     const checkForMatch =
-// }
 //must go inside function that starts game
 const startGame = () => {
     gameStart.gameStarted = true;
@@ -103,7 +91,7 @@ const startGame = () => {
     gameStart.loop = setInterval(() => {
         gameStart.totalTime++;
         //set interval executes the totaltime every 1000 ms gameStart.totaltime keeps track of elapsed time.
-        gameSelectors.moves.innerText = `${gameSelectors.totalFlips} moves`;
+        gameSelectors.moves.innerText = `${gameStart.totalFlips} moves`;
         gameSelectors.timer.innerHTML = `Time: ${gameStart.totalTime} sec`
         //innertext and html updates the html to display the changes to the user.
     }, 1000)
