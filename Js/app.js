@@ -1,7 +1,7 @@
 document.addEventListener('DOMContentLoaded', () => {
-    let playerGreeting = "Hello! Welcome to the Kawaii Memory Game. The way to play is as follows: Click on the cards you'd like to flip over. If you find a matching pair, you will gain points. Once all pairs are found, You have won the game! Hit the start button to begin."
+//     let playerGreeting = "Hello! Welcome to the Kawaii Memory Game. The way to play is as follows: Click on the cards you'd like to flip over. If you find a matching pair, you will gain points. Once all pairs are found, You have won the game! Hit the start button to begin."
 
-alert(playerGreeting)
+// alert(playerGreeting)
 
 const gameSelectors = {
     gameBoard: document.querySelector('.gameBoard'),
@@ -52,11 +52,11 @@ const random = (array, items) => {
 //     gameSelectors.start.classList.add('disabled');
 //     StaticRange.loop = setInterval(() => {
 //         StaticRange.totalTime++;
-
 //         gameSelectors.moves.innerText = `${gameStart.totalFlips} moves`;
 //         gameSelectors.timer.innerText = `${gameStart.totalTime} sec`
 //     })
 // }
+
 const cards = [
     { name: "KawaiiCat", img: "Images/KawaiiCat copy.png" },
     { name: "KawaiiLion", img: "Images/KawaiiLion copy.png" },
@@ -109,63 +109,123 @@ const cardDisplay = `
 //     const checkForMatch =
 // }
 //must go inside function that starts game
+// const startGame = () => {
+//     gameStart.gameStarted = true;
+//     gameSelectors.start.classList.add('disabled');
+//     //add disabled class so start button cannot be clicked again once the game has started
+//     gameStart.loop = setInterval(() => {
+//         gameStart.totalTime++;
+//         //set interval executes the totaltime every 1000 ms gameStart.totaltime keeps track of elapsed time.
+//         gameSelectors.moves.innerText = `${gameSelectors.totalFlips} moves`;
+//         gameSelectors.timer.innerHTML = `Time: ${gameStart.totalTime} sec`
+//         //innertext and html updates the html to display the changes to the user.
+//     }, 1000)
+// }
+
 const startGame = () => {
     gameStart.gameStarted = true;
     gameSelectors.start.classList.add('disabled');
-    //add disabled class so start button cannot be clicked again once the game has started
+    // Add the 'flipped' class to the game board container
+    gameSelectors.gameBoard.classList.add('flipped');
     gameStart.loop = setInterval(() => {
         gameStart.totalTime++;
-        //set interval executes the totaltime every 1000 ms gameStart.totaltime keeps track of elapsed time.
-        gameSelectors.moves.innerText = `${gameSelectors.totalFlips} moves`;
+        gameSelectors.moves.innerText = `${gameStart.totalFlips} moves`;
         gameSelectors.timer.innerHTML = `Time: ${gameStart.totalTime} sec`
-        //innertext and html updates the html to display the changes to the user.
     }, 1000)
 }
 
+// const flipCard = card => {
+//     if (card && card.classList) {
+//     gameStart.flippedCards++;
+//     gameStart.totalFlips++;
+
+//     if (!gameStart.gameStarted) {
+//         startGame();
+//     }
+
+//     card.classList.add('flipped');
+//     //when card is flipped add 'flipped' class
+
+//     if (gameStart.flippedCards === 2) {
+//         const flippedCards = document.querySelectorAll('.flipped:not(.matched)');
+//         //selecting flipped cards that havent been matched yet
+//         if (flippedCards.length === 2 && flippedCards[0].innerHTML === flippedCards[1].innerHTML) {
+//             flippedCards.forEach(card => card.classList.add('matched'));
+//             //check if the two flipped cards are a match by checking html content
+//         } else {
+//             setTimeout(() => {
+//                 flippedCards.forEach(card => card.classList.remove('flipped'));
+//             }, 1000);
+//             //else remove the 'flipped' class.
+//         }
+//     }
+//         gameStart.flippedCards = 0;
+//     }
+
+//     const unmatchedCards = document.querySelectorAll('.card:not(.matched)');
+//     if (unmatchedCards.length === 0) {
+//         setTimeout(() => {
+//             gameSelectors.boardContainer.classList.add('flipped');
+//             gameSelectors.win.innerHTML = `
+//                 <span class="win-text">
+//                 You won!<br />
+//                 with <span class="highlight">${gameStart.totalFlips}</span>
+//                 moves<br />
+//                 under <span class="highlight">${gameStart.totalTime}</span>
+//                 seconds
+//                 </span>
+//             `;
+//             clearInterval(gameStart.loop);
+//         }, 1000);
+//     }
+// }
 const flipCard = card => {
-    gameStart.flippedCards++;
-    gameStart.totalFlips++;
+    if (card && card.classList) {
+        gameStart.flippedCards++;
+        gameStart.totalFlips++;
 
-    if (!gameStart.gameStarted) {
-        startGame();
-    }
-
-    card.classList.add('flipped');
-    //when card is flipped add 'flipped' class
-
-    if (gameStart.flippedCards === 2) {
-        const flippedCards = document.querySelectorAll('.flipped:not(.matched)');
-        //selecting flipped cards that havent been matched yet
-        if (flippedCards.length === 2 && flippedCards[0].innerHTML === flippedCards[1].innerHTML) {
-            flippedCards.forEach(card => card.classList.add('matched'));
-            //check if the two flipped cards are a match by checking html content
-        } else {
-            setTimeout(() => {
-                flippedCards.forEach(card => card.classList.remove('flipped'));
-            }, 1000);
-            //else remove the 'flipped' class.
+        if (!gameStart.gameStarted) {
+            startGame();
         }
 
-        gameStart.flippedCards = 0;
-    }
+        card.classList.add('flipped');
 
-    const unmatchedCards = document.querySelectorAll('.card:not(.matched)');
-    if (unmatchedCards.length === 0) {
-        setTimeout(() => {
-            gameSelectors.boardContainer.classList.add('flipped');
-            gameSelectors.win.innerHTML = `
-                <span class="win-text">
-                You won!<br />
-                with <span class="highlight">${gameStart.totalFlips}</span>
-                moves<br />
-                under <span class="highlight">${gameStart.totalTime}</span>
-                seconds
-                </span>
-            `;
-            clearInterval(gameStart.loop);
-        }, 1000);
+        if (gameStart.flippedCards === 2) {
+            const flippedCards = document.querySelectorAll('.flipped:not(.matched)');
+
+            if (flippedCards.length === 2 && flippedCards[0].innerHTML === flippedCards[1].innerHTML) {
+                flippedCards.forEach(card => card.classList.add('matched'));
+            } else {
+                setTimeout(() => {
+                    flippedCards.forEach(card => {
+                        card.classList.remove('flipped');
+                    });
+                }, 1000);
+            }
+
+            gameStart.flippedCards = 0;
+        }
+
+        const unmatchedCards = document.querySelectorAll('.card:not(.matched)');
+        if (unmatchedCards.length === 0) {
+            setTimeout(() => {
+                gameSelectors.gameBoard.classList.add('flipped');
+                gameSelectors.win.innerHTML = `
+                    <span class="win-text">
+                    You won!<br />
+                    with <span class="highlight">${gameStart.totalFlips}</span>
+                    moves<br />
+                    under <span class="highlight">${gameStart.totalTime}</span>
+                    seconds
+                    </span>
+                `;
+                clearInterval(gameStart.loop);
+            }, 1000);
+        }
     }
 }
+
+
 
 const attachEventListeners = () => {
     document.addEventListener('click', event => {
