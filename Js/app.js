@@ -103,12 +103,11 @@ const startGame = () => {
     gameStart.loop = setInterval(() => {
         gameStart.totalTime++;
         //set interval executes the totaltime every 1000 ms gameStart.totaltime keeps track of elapsed time.
-        gameSelectors.moves.innerText = `Moves made: ${gameStart.totalFlips}`;
+        gameSelectors.moves.innerText = `${gameSelectors.totalFlips} moves`;
         gameSelectors.timer.innerHTML = `Time: ${gameStart.totalTime} sec`
         //innertext and html updates the html to display the changes to the user.
     }, 1000)
 }
-
 const flipCard = card => {
     gameStart.flippedCards++;
     gameStart.totalFlips++;
@@ -131,44 +130,27 @@ const flipCard = card => {
         }
         gameStart.flippedCards = 0;
     }
-    if (!document.querySelectorAll('.card:not(.flipped)').length) {
+    const unmatchedCards = document.querySelectorAll('.card:not(.matched)');
+    if (unmatchedCards.length === 0) {
         setTimeout(() => {
-            gameSelectors.gameBoard.classList.add('flipped')
+            gameSelectors.boardContainer.classList.add('flipped');
             gameSelectors.win.innerHTML = `
                 <span class="win-text">
-                    You won!<br />
-                    with <span class="highlight">${gameStart.totalFlips}</span> moves<br />
-                    under <span class="highlight">${gameStart.totalTime}</span> seconds
+                You won!<br />
+                with <span class="highlight">${gameStart.totalFlips}</span>
+                moves<br />
+                under <span class="highlight">${gameStart.totalTime}</span>
+                seconds
                 </span>
-            `
-
-            clearInterval(state.loop)
-        }, 1000)
+            `;
+            clearInterval(gameStart.loop);
+        }, 1000);
     }
 }
-//     const unmatchedCards = document.querySelectorAll('.card:not(.matched)');
-//     if (unmatchedCards.length === 0) {
-//         setTimeout(() => {
-//             gameSelectors.boardContainer.classList.add('flipped');
-//             gameSelectors.win.innerHTML = `
-//                 <span class="win-text">
-//                 You won!<br />
-//                 with <span class="highlight">${gameStart.totalFlips}</span>
-//                 moves<br />
-//                 under <span class="highlight">${gameStart.totalTime}</span>
-//                 seconds
-//                 </span>
-//             `;
-//             clearInterval(gameStart.loop);
-//         }, 1000);
-//     }
-// }
-
 const attachEventListeners = () => {
     document.addEventListener('click', event => {
         const eventTarget = event.target;
         const eventParent = eventTarget.parentElement;
-
         if (eventTarget.className.includes('card') && !eventParent.className.includes('flipped')) {
             flipCard(eventParent)
         } else if (eventTarget.nodeName === 'BUTTON' && !eventTarget.className.includes('disabled')) {
