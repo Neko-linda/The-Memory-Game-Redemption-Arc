@@ -6,6 +6,10 @@ html{
     overflow: hidden;
 }
 
+.disabled {
+    color: gray;
+}
+
 .board {
     padding: 20px;
     display: grid;
@@ -31,7 +35,7 @@ html{
 }
 
 .stats {
-    font-size: 45px;
+    font-size: 14pt;
     font-weight: normal;
     color: blueviolet;
 }
@@ -49,16 +53,16 @@ button {
 .board, .win {
     box-shadow: 0 20px 20px rgb(79, 42, 77);
     border-radius: 10px;
-    background: rgb(162, 200, 237);
+    background: linear-gradient(135deg,  #03001e 0%,#cf96f5 0%,#a0f2f1 50%, #a01b7b 100%);
     transition: transform .6s cubic-bezier(0.4, 0.0, 0.2, 1);
     backface-visibility: hidden;
 }
 
 .gameBoard.flipped .board {
-    transform: rotateY(180deg) rotateZ(180deg)
+    transform: rotateY(180deg) rotateZ(50deg)
 }
 
-.gameBoard.flipped .board {
+.gameBoard.flipped .win {
     transform: rotateY(0) rotateZ(0)
 }
 
@@ -74,22 +78,22 @@ button {
     border-radius: 5px; 
     width: 100%;
     height: 100%;
-    background: rgb(225, 197, 197);
+    background: rgb(179, 214, 249);
     transition: transform .6s cubic-bezier(0.4, 0.0, 0.2, 1);
     backface-visibility: hidden;
 }
 /* cubic beizer for a transition effect */
 .card-back {
-    transform: rotateY(100deg) rotateZ(50deg);
-    font-size: 30px;
+    transform: rotateY(180deg) rotateZ(50deg);
+    font-size: 28pt;
     user-select: none;
     text-align: center;
     line-height: 100px;
-    background: rgb(244, 229, 207);
+    background: rgb(199, 138, 229);
 }
 
 .card.flipped .card-front {
-    transform: rotate(100deg) rotateZ(50deg);
+    transform: rotate(180deg) rotateZ(50deg);
 }
 
 .card.flipped .card-back {
@@ -108,6 +112,22 @@ button {
     background: seashell;
 }
 
+/* .win {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    background: seashell;
+    transform: rotateY(180deg) rotateZ(50deg);
+    display: none; 
+}
+
+.show {
+    display: block;
+} */
+
 .win-text {
     position: absolute;
     top: 50%;
@@ -119,8 +139,4 @@ button {
 
 .highlight {
     color: palevioletred;
-}
-
-.disabled {
-    color: gray;
 }
