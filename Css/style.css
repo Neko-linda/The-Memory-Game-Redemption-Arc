@@ -1,5 +1,6 @@
 html{
-    background-image: url(https://img.freepik.com/free-vector/gradient-pastel-sky-background_23-2148909258.jpg);
+    font-family: 'Roboto Condensed', sans-serif;
+    background-image: url(https://i.pinimg.com/originals/4a/0c/a0/4a0ca034f88dedc9fb49ea846476198a.gif);
     background-size: cover;
     width: 100%;
     height: 100%;
@@ -22,6 +23,12 @@ html{
     grid-gap: 20px;
 }
 
+@media screen and (min-width: 768px) {
+    .board {
+        grid-template-columns: repeat(6, auto);
+    }
+}
+
 .gameBoard {
     position: relative;
 }
@@ -42,13 +49,14 @@ html{
 .stats {
     font-size: 14pt;
     font-weight: normal;
-    color: blueviolet;
+    color: rgb(235, 210, 237);
 }
 
 button {
+    font-family: 'Roboto Condensed', sans-serif;
     background-color: rgb(179, 214, 249);
     color: blueviolet;
-    border-radius: 40px;
+    border-radius: 20px;
     border: 0;
     cursor: pointer;
     padding: 10px 10px;
