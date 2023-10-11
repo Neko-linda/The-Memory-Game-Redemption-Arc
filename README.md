@@ -14,6 +14,12 @@ I will design logic for winning and visually display when the user has won. The 
 
 Fork and Clone my repo locally, Open using VS code and deployment of your choice.
 
+## Technologies Used
+
+Javascript
+CSS
+HTML
+
 ## Code Snippets
 An example of some code I am using:
 <img width="596" alt="Screenshot 2023-10-10 at 12 22 12 AM" src="https://github.com/Neko-linda/The-Memory-Game-Redemption-Arc/assets/119255259/034b99f7-cc68-480c-9877-828dc1c63cea">
