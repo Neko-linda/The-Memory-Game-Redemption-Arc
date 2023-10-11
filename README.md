@@ -20,6 +20,8 @@ One of the biggest hurdles for me was my FlipCard function. I came across many b
 
 Some of my stretch goals include adding a Stop Game and/or Reset Game button with functionality, an alert or greeting that gives the player instructions, and adding noise or background/music once the game starts. 
 
+One of my unsolved problems is the reset button not randomizing the placement of the cards on the bord, and a visual bug where the back of the card is diagnol behind the images when the game starts.
+
 The finished Product:
 <img width="1440" alt="Screenshot 2023-10-10 at 12 27 05 AM" src="https://github.com/Neko-linda/The-Memory-Game-Redemption-Arc/assets/119255259/44aecb18-36f3-4d20-9991-bc4ab0591a63">
 
